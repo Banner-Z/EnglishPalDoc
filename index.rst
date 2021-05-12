@@ -10,11 +10,11 @@ Welcome to EnglishPalDoc's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   lab1
+   module-level_dependency
 
 Indices and tables
 ==================
-
+    
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
