@@ -10,7 +10,7 @@ Welcome to EnglishPalDoc's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-    lab1
+   lab1
 
 Indices and tables
 ==================
