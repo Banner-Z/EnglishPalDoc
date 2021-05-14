@@ -78,3 +78,74 @@ strict digraph "dependencies" {
 | "test_signup.py" -> "random.py";
 | "test_signup.py" -> "string.py";
 | }
+
+class/function-level dependency
+---------------------------------
+
+stateDiagram-v2
+    user_reset
+    logout
+    get_random_image
+    mainpage --> get_random_ads
+    mark_word --> load_freq_history
+    userpage --> get_today_article
+    userpage --> appears_in_test
+    signup --> add_user
+    signup --> check_username_availability
+    signup --> verify_user
+    login --> verify_user
+    login --> get_expiry_date
+    user_mark_word --> get_time
+    get_today_article --> load_freq_history
+    get_today_article --> within_range
+    get_today_article --> get_question_part
+    get_today_article --> get_answer_part
+
+    mainpage --> pickle_idea.dict2lst
+    mainpage --> pickle_idea.merge_frequency
+    mainpage --> pickle_idea.save_frequency_to_pickle
+    pickle_idea.merge_frequency --> pickle_idea.lst2dict
+    mark_word --> pickle_idea.dict2lst
+    mark_word --> pickle_idea.merge_frequency
+    mark_word --> pickle_idea.save_frequency_to_pickle  
+    load_freq_history --> pickle_idea.load_record
+    userpage --> pickle_idea.load_record
+    
+    InsertQuery --> Sqlite3Template
+    verify_user --> RecordQuery
+    add_user --> InsertQuery
+    check_username_availability --> RecordQuery
+    get_expiry_date --> RecordQuery
+    get_today_article --> RecordQuery
+    RecordQuery --> Sqlite3Template
+
+    pickle_idea2.merge_frequency --> pickle_idea2.lst2dict
+    user_mark_word --> pickle_idea2.dict2lst
+    userpage --> pickle_idea2.dict2lst
+    user_mark_word --> pickle_idea2.merge_frequency
+    pickle_idea2.load_record
+    user_mark_word --> pickle_idea2.save_frequency_to_pickle 
+
+    difficulty.load_record
+    difficulty.get_difficulty_level --> difficulty.difficulty_level_from_frequency
+    get_today_article --> difficulty.get_difficulty_level
+    get_today_article --> difficulty.user_difficulty_level
+    get_today_article --> difficulty.text_difficulty_level
+    difficulty.user_difficulty_level --> difficulty.revert_dict
+
+    userpage --> WordFreq
+
+    WordFreq --> wordfreqCMD.freq
+    mainpage --> WordFreq
+    mainpage --> wordfreqCMD.youdao_link
+    mainpage --> wordfreqCMD.sort_in_descending_order
+    difficulty.text_difficulty_level --> wordfreqCMD.freq
+    difficulty.text_difficulty_level --> wordfreqCMD.remove_punctuation
+    difficulty.text_difficulty_level --> wordfreqCMD.sort_in_descending_order
+    difficulty.user_difficulty_level --> wordfreqCMD.sort_in_ascending_order
+    userpage --> wordfreqCMD.youdao_link
+    userpage --> wordfreqCMD.sort_in_descending_order
+    wordfreqCMD.make_html_page --> wordfreqCMD.youdao_link
+    file2str
+    WordFreq --> wordfreqCMD.remove_punctuation
+    WordFreq --> wordfreqCMD.sort_in_descending_order
