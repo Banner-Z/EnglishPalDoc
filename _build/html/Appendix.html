@@ -121,6 +121,78 @@
 <div class="line">}</div>
 </div>
 </div>
+<div class="section" id="class-function-level-dependency">
+<h2>class/function-level dependency<a class="headerlink" href="#class-function-level-dependency" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stateDiagram</span><span class="o">-</span><span class="n">v2</span>
+    <span class="n">user_reset</span>
+    <span class="n">logout</span>
+    <span class="n">get_random_image</span>
+    <span class="n">mainpage</span> <span class="o">--&gt;</span> <span class="n">get_random_ads</span>
+    <span class="n">mark_word</span> <span class="o">--&gt;</span> <span class="n">load_freq_history</span>
+    <span class="n">userpage</span> <span class="o">--&gt;</span> <span class="n">get_today_article</span>
+    <span class="n">userpage</span> <span class="o">--&gt;</span> <span class="n">appears_in_test</span>
+    <span class="n">signup</span> <span class="o">--&gt;</span> <span class="n">add_user</span>
+    <span class="n">signup</span> <span class="o">--&gt;</span> <span class="n">check_username_availability</span>
+    <span class="n">signup</span> <span class="o">--&gt;</span> <span class="n">verify_user</span>
+    <span class="n">login</span> <span class="o">--&gt;</span> <span class="n">verify_user</span>
+    <span class="n">login</span> <span class="o">--&gt;</span> <span class="n">get_expiry_date</span>
+    <span class="n">user_mark_word</span> <span class="o">--&gt;</span> <span class="n">get_time</span>
+    <span class="n">get_today_article</span> <span class="o">--&gt;</span> <span class="n">load_freq_history</span>
+    <span class="n">get_today_article</span> <span class="o">--&gt;</span> <span class="n">within_range</span>
+    <span class="n">get_today_article</span> <span class="o">--&gt;</span> <span class="n">get_question_part</span>
+    <span class="n">get_today_article</span> <span class="o">--&gt;</span> <span class="n">get_answer_part</span>
+
+    <span class="n">mainpage</span> <span class="o">--&gt;</span> <span class="n">pickle_idea</span><span class="o">.</span><span class="n">dict2lst</span>
+    <span class="n">mainpage</span> <span class="o">--&gt;</span> <span class="n">pickle_idea</span><span class="o">.</span><span class="n">merge_frequency</span>
+    <span class="n">mainpage</span> <span class="o">--&gt;</span> <span class="n">pickle_idea</span><span class="o">.</span><span class="n">save_frequency_to_pickle</span>
+    <span class="n">pickle_idea</span><span class="o">.</span><span class="n">merge_frequency</span> <span class="o">--&gt;</span> <span class="n">pickle_idea</span><span class="o">.</span><span class="n">lst2dict</span>
+    <span class="n">mark_word</span> <span class="o">--&gt;</span> <span class="n">pickle_idea</span><span class="o">.</span><span class="n">dict2lst</span>
+    <span class="n">mark_word</span> <span class="o">--&gt;</span> <span class="n">pickle_idea</span><span class="o">.</span><span class="n">merge_frequency</span>
+    <span class="n">mark_word</span> <span class="o">--&gt;</span> <span class="n">pickle_idea</span><span class="o">.</span><span class="n">save_frequency_to_pickle</span>
+    <span class="n">load_freq_history</span> <span class="o">--&gt;</span> <span class="n">pickle_idea</span><span class="o">.</span><span class="n">load_record</span>
+    <span class="n">userpage</span> <span class="o">--&gt;</span> <span class="n">pickle_idea</span><span class="o">.</span><span class="n">load_record</span>
+
+    <span class="n">InsertQuery</span> <span class="o">--&gt;</span> <span class="n">Sqlite3Template</span>
+    <span class="n">verify_user</span> <span class="o">--&gt;</span> <span class="n">RecordQuery</span>
+    <span class="n">add_user</span> <span class="o">--&gt;</span> <span class="n">InsertQuery</span>
+    <span class="n">check_username_availability</span> <span class="o">--&gt;</span> <span class="n">RecordQuery</span>
+    <span class="n">get_expiry_date</span> <span class="o">--&gt;</span> <span class="n">RecordQuery</span>
+    <span class="n">get_today_article</span> <span class="o">--&gt;</span> <span class="n">RecordQuery</span>
+    <span class="n">RecordQuery</span> <span class="o">--&gt;</span> <span class="n">Sqlite3Template</span>
+
+    <span class="n">pickle_idea2</span><span class="o">.</span><span class="n">merge_frequency</span> <span class="o">--&gt;</span> <span class="n">pickle_idea2</span><span class="o">.</span><span class="n">lst2dict</span>
+    <span class="n">user_mark_word</span> <span class="o">--&gt;</span> <span class="n">pickle_idea2</span><span class="o">.</span><span class="n">dict2lst</span>
+    <span class="n">userpage</span> <span class="o">--&gt;</span> <span class="n">pickle_idea2</span><span class="o">.</span><span class="n">dict2lst</span>
+    <span class="n">user_mark_word</span> <span class="o">--&gt;</span> <span class="n">pickle_idea2</span><span class="o">.</span><span class="n">merge_frequency</span>
+    <span class="n">pickle_idea2</span><span class="o">.</span><span class="n">load_record</span>
+    <span class="n">user_mark_word</span> <span class="o">--&gt;</span> <span class="n">pickle_idea2</span><span class="o">.</span><span class="n">save_frequency_to_pickle</span>
+
+    <span class="n">difficulty</span><span class="o">.</span><span class="n">load_record</span>
+    <span class="n">difficulty</span><span class="o">.</span><span class="n">get_difficulty_level</span> <span class="o">--&gt;</span> <span class="n">difficulty</span><span class="o">.</span><span class="n">difficulty_level_from_frequency</span>
+    <span class="n">get_today_article</span> <span class="o">--&gt;</span> <span class="n">difficulty</span><span class="o">.</span><span class="n">get_difficulty_level</span>
+    <span class="n">get_today_article</span> <span class="o">--&gt;</span> <span class="n">difficulty</span><span class="o">.</span><span class="n">user_difficulty_level</span>
+    <span class="n">get_today_article</span> <span class="o">--&gt;</span> <span class="n">difficulty</span><span class="o">.</span><span class="n">text_difficulty_level</span>
+    <span class="n">difficulty</span><span class="o">.</span><span class="n">user_difficulty_level</span> <span class="o">--&gt;</span> <span class="n">difficulty</span><span class="o">.</span><span class="n">revert_dict</span>
+
+    <span class="n">userpage</span> <span class="o">--&gt;</span> <span class="n">WordFreq</span>
+
+    <span class="n">WordFreq</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">freq</span>
+    <span class="n">mainpage</span> <span class="o">--&gt;</span> <span class="n">WordFreq</span>
+    <span class="n">mainpage</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">youdao_link</span>
+    <span class="n">mainpage</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">sort_in_descending_order</span>
+    <span class="n">difficulty</span><span class="o">.</span><span class="n">text_difficulty_level</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">freq</span>
+    <span class="n">difficulty</span><span class="o">.</span><span class="n">text_difficulty_level</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">remove_punctuation</span>
+    <span class="n">difficulty</span><span class="o">.</span><span class="n">text_difficulty_level</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">sort_in_descending_order</span>
+    <span class="n">difficulty</span><span class="o">.</span><span class="n">user_difficulty_level</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">sort_in_ascending_order</span>
+    <span class="n">userpage</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">youdao_link</span>
+    <span class="n">userpage</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">sort_in_descending_order</span>
+    <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">make_html_page</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">youdao_link</span>
+    <span class="n">file2str</span>
+    <span class="n">WordFreq</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">remove_punctuation</span>
+    <span class="n">WordFreq</span> <span class="o">--&gt;</span> <span class="n">wordfreqCMD</span><span class="o">.</span><span class="n">sort_in_descending_order</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -150,6 +222,7 @@
 <li class="toctree-l1"><a class="reference internal" href="References.html">References</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Appendix</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-level-dependency">module-level dependency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-function-level-dependency">class/function-level dependency</a></li>
 </ul>
 </li>
 </ul>
