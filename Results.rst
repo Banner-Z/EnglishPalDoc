@@ -4,6 +4,7 @@ Results
 实验中生成依赖图的代码已在附件中给出，
 这里我将依次展示模块间依赖图、各模块的类/函数依赖图、总类/函数依赖图。
 
-.. figure:: graphviz.png
+.. figure:: graphviz.svg
     
     模块依赖图
+    
